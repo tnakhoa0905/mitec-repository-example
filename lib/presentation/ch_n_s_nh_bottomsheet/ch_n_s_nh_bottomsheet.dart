@@ -1,0 +1,61 @@
+import '../ch_n_s_nh_bottomsheet/widgets/ch_n_s_nh_item_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:mitec/core/app_export.dart';
+import 'package:mitec/widgets/custom_icon_button.dart';
+
+class ChNSNhBottomsheet extends StatelessWidget {
+  const ChNSNhBottomsheet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    mediaQueryData = MediaQuery.of(context);
+    return Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 8.v),
+        decoration: AppDecoration.fillOnErrorContainer
+            .copyWith(borderRadius: BorderRadiusStyle.customBorderTL30),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(height: 8.v),
+              Container(
+                  height: 4.v,
+                  width: 42.h,
+                  decoration: BoxDecoration(
+                      color: appTheme.blue50,
+                      borderRadius: BorderRadius.circular(2.h))),
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 1.h),
+                      child: ListView.separated(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: 7.v);
+                          },
+                          itemCount: 4,
+                          itemBuilder: (context, index) {
+                            return ChNSNhItemWidget();
+                          }))),
+              SizedBox(height: 10.v),
+              CustomIconButton(
+                  height: 42.adaptSize,
+                  width: 42.adaptSize,
+                  padding: EdgeInsets.all(11.h),
+                  decoration: IconButtonStyleHelper.outlineBlueTL211,
+                  onTap: () {
+                    onTapBtnCloseone(context);
+                  },
+                  child: CustomImageView(svgPath: ImageConstant.imgClose))
+            ]));
+  }
+
+  /// Navigates back to the previous screen.
+  ///
+  /// This function takes a [BuildContext] object as a parameter, which is used
+  /// to navigate back to the previous screen.
+  onTapBtnCloseone(BuildContext context) {
+    Navigator.pop(context);
+  }
+}
